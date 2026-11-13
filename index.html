@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Matra · Hitung bahan furnitur dari DWG</title>
+    <meta name="description" content="Matra membaca model 3D di file DWG, memecahnya menjadi part, lalu menyusun Bill of Materials dan cut list per material. Tanpa hitung manual." />
+    <meta name="theme-color" content="#16201c" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3 L28 9.5 L28 22.5 L16 29 L4 22.5 L4 9.5 Z M4 9.5 L16 16 L28 9.5 M16 16 L16 29' fill='none' stroke='%2316201c' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M16 16 L28 9.5 L28 22.5 L16 29 Z' fill='%23c8894f'/%3E%3C/svg%3E" />
+    <!-- font lokal (sama dengan MatraWeb/wwwroot/lib/fonts), tanpa CDN -->
+    <link rel="stylesheet" href="fonts/fonts.css" />
+    <link rel="stylesheet" href="landing.css" />
+</head>
+<body>
+    <a class="lewati" href="#isi">Lewati ke isi</a>
+
+    <!-- ===== Navigasi ===== -->
+    <header class="nav" data-nav>
+        <div class="wadah wadah-lebar nav-dalam">
+            <a class="brand" href="#" aria-label="Matra, ke atas">
+                <svg class="logo" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true">
+                    <path d="M16 3 L28 9.5 L28 22.5 L16 29 L4 22.5 L4 9.5 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                    <path d="M4 9.5 L16 16 L28 9.5 M16 16 L16 29" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                    <path d="M16 16 L28 9.5 L28 22.5 L16 29 Z" fill="#c8894f" opacity="0.9" />
+                </svg>
+                <span>Matra</span>
+            </a>
+            <nav class="nav-menu" aria-label="Utama">
+                <a href="#alur">Cara kerja</a>
+                <a href="#fitur">Fitur</a>
+                <a href="#cutlist">Cut list</a>
+                <a href="#edisi">Edisi</a>
+                <a href="#faq">FAQ</a>
+            </nav>
+            <a class="tombol tombol-kayu tombol-kecil" href="#kontak">Minta demo</a>
+        </div>
+    </header>
+
+    <main id="isi">
+        <!-- ===== Hero ===== -->
+        <section class="hero">
+            <div class="wadah wadah-lebar hero-grid">
+                <div class="hero-teks">
+                    <span class="eyebrow">Quantity take-off furnitur</span>
+                    <h1>Dari gambar DWG ke daftar bahan, <span>tanpa hitung manual.</span></h1>
+                    <p class="hero-desc">
+                        Unggah model 3D furnitur. Matra memecah model menjadi part, mengukur bahan mentahnya,
+                        lalu menyusun Bill of Materials dan cut list per material, lengkap dengan m³ dan biaya.
+                    </p>
+                    <div class="hero-aksi">
+                        <a class="tombol tombol-kayu" href="#kontak">Coba Matra Demo</a>
+                        <a class="tombol tombol-garis" href="#alur">Lihat cara kerjanya</a>
+                    </div>
+                    <ul class="hero-poin">
+                        <li>Tanpa AutoCAD terpasang</li>
+                        <li>Jalan di jaringan kantor, tanpa internet</li>
+                        <li>Ekspor Excel &amp; PDF</li>
+                        <li>Bisa disesuaikan dengan kebutuhan pabrik Anda</li>
+                    </ul>
+                </div>
+
+                <!-- video demo YouTube: thumbnail dulu, iframe dimuat saat diklik (halaman lebih ringan) -->
+                <div class="mockup">
+                    <div class="mockup-bar" aria-hidden="true">
+                        <span class="titik"></span><span class="titik"></span><span class="titik"></span>
+                        <span class="mockup-file">Matra · video demo</span>
+                    </div>
+                    <div class="video" data-video="b4D5PwYLCfA">
+                        <button type="button" class="video-putar" aria-label="Putar video demo Matra">
+                            <img src="https://i.ytimg.com/vi/b4D5PwYLCfA/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/b4D5PwYLCfA/hqdefault.jpg'" alt="" width="1280" height="720" />
+                            <span class="video-ikon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" width="28" height="28"><path d="M8 5 L19 12 L8 19 Z" fill="currentColor" /></svg>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Alur ===== -->
+        <section class="bagian" id="alur">
+            <div class="wadah">
+                <div class="kepala">
+                    <span class="eyebrow eyebrow-gelap">Cara kerja</span>
+                    <h2>Empat langkah dari file ke daftar potong</h2>
+                </div>
+                <ol class="alur">
+                    <li>
+                        <span class="alur-no">01</span>
+                        <h3>Unggah DWG</h3>
+                        <p>Buat proyek, unggah satu atau banyak file. Satu gambar = satu unit furnitur. File dibaca di latar, Anda bisa lanjut bekerja.</p>
+                    </li>
+                    <li>
+                        <span class="alur-no">02</span>
+                        <h3>Part terbaca otomatis</h3>
+                        <p>Setiap benda 3D di gambar, termasuk yang ada di dalam komponen berulang, dipecah menjadi part. Ukuran bahan mentah P × L × T diambil dari muka potongnya.</p>
+                    </li>
+                    <li>
+                        <span class="alur-no">03</span>
+                        <h3>Pilih material di 3D</h3>
+                        <p>Klik part di pratinjau 3D, beri material. Terapkan sekaligus ke part identik atau mirip dalam satu klik.</p>
+                    </li>
+                    <li>
+                        <span class="alur-no">04</span>
+                        <h3>BOM &amp; cut list siap</h3>
+                        <p>Bill of Materials per material dan ukuran, cut list netto/brutto, m³, dan biaya bahan. Unduh Excel atau PDF.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ===== Galeri (frame dari out/showcase/frame, dikonversi ke WebP 1600px) ===== -->
+        <section class="bagian bagian-gelap" id="galeri">
+            <div class="wadah">
+                <div class="kepala">
+                    <span class="eyebrow">Lihat langsung</span>
+                    <h2>Matra dari unggah sampai siap produksi</h2>
+                </div>
+                <div class="galeri-tab" role="tablist" aria-label="Langkah Matra">
+                    <button type="button" role="tab" id="tab-0" aria-controls="galeri-panel" aria-selected="true" tabindex="0" data-src="img/03-unggah-dwg.webp" data-alt="Unggah file DWG, satuan gambar dibaca langsung dari file.">
+                        <span class="galeri-no">01</span>Unggah DWG
+                    </button>
+                    <button type="button" role="tab" id="tab-1" aria-controls="galeri-panel" aria-selected="false" tabindex="-1" data-src="img/04-solid-jadi-part.webp" data-alt="Setiap benda di model 3D menjadi part, ukuran bahan diambil dari bentuknya.">
+                        <span class="galeri-no">02</span>Baca otomatis
+                    </button>
+                    <button type="button" role="tab" id="tab-2" aria-controls="galeri-panel" aria-selected="false" tabindex="-1" data-src="img/05-pisahkan-part.webp" data-alt="Satu klik mengurai model, sampai dowel dan sekrup terkecil.">
+                        <span class="galeri-no">03</span>Urai part
+                    </button>
+                    <button type="button" role="tab" id="tab-3" aria-controls="galeri-panel" aria-selected="false" tabindex="-1" data-src="img/06-material-sekali-klik.webp" data-alt="Pilih satu part, part yang identik ikut terpilih.">
+                        <span class="galeri-no">04</span>Pilih material
+                    </button>
+                    <button type="button" role="tab" id="tab-4" aria-controls="galeri-panel" aria-selected="false" tabindex="-1" data-src="img/07-bom-klik-baris.webp" data-alt="Kebutuhan bahan per material dan ukuran. Klik baris, part disorot di model.">
+                        <span class="galeri-no">05</span>BOM &amp; cut list
+                    </button>
+                    <button type="button" role="tab" id="tab-5" aria-controls="galeri-panel" aria-selected="false" tabindex="-1" data-src="img/08-excel-pdf-siap-produksi.webp" data-alt="Excel daftar potong format pabrik, PDF cut list, dan PDF BOM.">
+                        <span class="galeri-no">06</span>Siap produksi
+                    </button>
+                    <button type="button" role="tab" id="tab-6" aria-controls="galeri-panel" aria-selected="false" tabindex="-1" data-src="img/09-kirim-3d-tembus-pandang.webp" data-alt="Model 3D yang dibuka buyer di browser, tanpa material.">
+                        <span class="galeri-no">07</span>Kirim ke buyer
+                    </button>
+                </div>
+                <div class="galeri-panel" id="galeri-panel" role="tabpanel" aria-labelledby="tab-0">
+                    <img src="img/03-unggah-dwg.webp" alt="Unggah file DWG, satuan gambar dibaca langsung dari file." width="1600" height="900" />
+                    <button type="button" class="galeri-geser galeri-kiri" data-geser="-1" aria-label="Langkah sebelumnya">
+                        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5 L8 12 L15 19" /></svg>
+                    </button>
+                    <button type="button" class="galeri-geser galeri-kanan" data-geser="1" aria-label="Langkah berikutnya">
+                        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 5 L16 12 L9 19" /></svg>
+                    </button>
+                </div>
+            </div>
+            <!-- muat gambar lain lebih awal supaya ganti tab tidak berkedip -->
+            <div hidden><link rel="prefetch" href="img/04-solid-jadi-part.webp" /><link rel="prefetch" href="img/05-pisahkan-part.webp" /><link rel="prefetch" href="img/06-material-sekali-klik.webp" /><link rel="prefetch" href="img/07-bom-klik-baris.webp" /><link rel="prefetch" href="img/08-excel-pdf-siap-produksi.webp" /><link rel="prefetch" href="img/09-kirim-3d-tembus-pandang.webp" /></div>
+        </section>
+
+        <!-- ===== Fitur ===== -->
+        <section class="bagian bagian-abu" id="fitur">
+            <div class="wadah">
+                <div class="kepala">
+                    <span class="eyebrow eyebrow-gelap">Fitur</span>
+                    <h2>Dibuat untuk alur kerja pabrik furnitur</h2>
+                    <p>Dari drafter yang menggambar sampai bagian pembelian yang memesan kayu.</p>
+                </div>
+                <div class="fitur-grid">
+                    <article class="fitur">
+                        <svg class="fitur-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 L21 7 V17 L12 22 L3 17 V7 Z M3 7 L12 12 L21 7 M12 12 V22" /></svg>
+                        <h3>Baca model 3D langsung</h3>
+                        <p>File DWG dibaca tanpa AutoCAD, dari versi lama sampai AutoCAD terbaru. Komponen yang dipakai berulang kali di gambar ikut terhitung.</p>
+                    </article>
+                    <article class="fitur">
+                        <svg class="fitur-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4 H10 V10 H4 Z M14 4 H20 V10 H14 Z M4 14 H10 V20 H4 Z M14 14 H20 V20 H14 Z" /></svg>
+                        <h3>Pratinjau 3D interaktif</h3>
+                        <p>Putar model, urai part agar terlihat satu per satu, tampilan hitam-putih, kelompokkan part, dan pilih banyak part sekaligus.</p>
+                    </article>
+                    <article class="fitur">
+                        <svg class="fitur-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11 A8 8 0 0 0 5.5 6.5 L4 8 M4 3 V8 H9 M4 13 A8 8 0 0 0 18.5 17.5 L20 16 M20 21 V16 H15" /></svg>
+                        <h3>Revisi gambar tanpa ulang kerja</h3>
+                        <p>Desain berubah? Unggah ulang DWG-nya. Material, ukuran bahan yang sudah diubah, dan kelompok part tetap tersimpan.</p>
+                    </article>
+                    <article class="fitur">
+                        <svg class="fitur-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5 H20 M4 10 H20 M4 15 H20 M4 20 H14" /></svg>
+                        <h3>Cut list format pabrik</h3>
+                        <p>Komponen, KWT, T × L × P netto, P brutto dengan allowance, jumlah, dan m³, mengikuti format daftar potong yang biasa dipakai pabrik.</p>
+                    </article>
+                    <article class="fitur">
+                        <svg class="fitur-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 V21 M17 7 H9.5 A2.5 2.5 0 0 0 9.5 12 H14.5 A2.5 2.5 0 0 1 14.5 17 H7" /></svg>
+                        <h3>Biaya bahan</h3>
+                        <p>Harga per m³, susut % per material, dan panel berlembar dihitung per lembar, termasuk tebal mata gergaji. Qty dikali jumlah unit pesanan.</p>
+                    </article>
+                    <article class="fitur">
+                        <svg class="fitur-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6 L12 13 L21 6 M3 6 H21 V18 H3 Z" /></svg>
+                        <h3>Kirim model 3D ke buyer</h3>
+                        <p>Satu file yang langsung dibuka buyer di browser, tanpa internet dan tanpa memasang aplikasi. Bentuk dan ukuran terlihat, material tidak ikut terkirim.</p>
+                    </article>
+                    <article class="fitur">
+                        <svg class="fitur-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 11 A4 4 0 1 0 8 3 A4 4 0 1 0 8 11 Z M2 21 C2 17 5 15 8 15 C11 15 14 17 14 21 M16 3.5 A4 4 0 0 1 16 10.5 M18 15.5 C20.5 16.2 22 18 22 21" /></svg>
+                        <h3>Banyak pengguna, akses sesuai jabatan</h3>
+                        <p>Satu komputer jadi pusat data, komputer lain terhubung lewat jaringan kantor. Riwayat perubahan per gambar dan penanda siapa yang sedang membuka.</p>
+                    </article>
+                    <article class="fitur">
+                        <svg class="fitur-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 L20 6 V12 C20 16.5 16.5 20 12 21 C7.5 20 4 16.5 4 12 V6 Z M9 12 L11 14 L15 10" /></svg>
+                        <h3>Data tetap di kantor Anda</h3>
+                        <p>Gambar dan data tersimpan di komputer kantor sendiri. Cadangan dibuat otomatis, termasuk semua file gambar, dan bisa dipulihkan kapan saja.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Contoh cut list ===== -->
+        <section class="bagian bagian-gelap" id="cutlist">
+            <div class="wadah cutlist-grid">
+                <div class="kepala kepala-kiri">
+                    <span class="eyebrow">Hasil</span>
+                    <h2>Cut list yang langsung dipakai bagian produksi</h2>
+                    <p>Satu baris per komponen sama. P brutto = P netto + allowance potong (bawaan 20 mm). m³ dihitung dari ukuran netto, total per material.</p>
+                    <ul class="cek">
+                        <li>Per gambar atau gabungan satu proyek</li>
+                        <li>Excel dengan rumus, atau PDF siap cetak</li>
+                        <li>Diperbarui begitu material atau ukuran diubah</li>
+                    </ul>
+                </div>
+                <!-- contoh angka: m³ = T × L × P netto × jml / 10^9, dibulatkan 6 desimal -->
+                <div class="tabel-bingkai" role="region" aria-label="Contoh cut list" tabindex="0">
+                    <table class="tabel">
+                        <caption>Contoh cut list · Teak solid</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Komponen</th>
+                                <th scope="col" class="angka">T</th>
+                                <th scope="col" class="angka">L</th>
+                                <th scope="col" class="angka">P netto</th>
+                                <th scope="col" class="angka">P brutto</th>
+                                <th scope="col" class="angka">Jml</th>
+                                <th scope="col" class="angka">m³</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Kaki depan</td><td class="angka">40</td><td class="angka">40</td><td class="angka">400</td><td class="angka">420</td><td class="angka">2</td><td class="angka">0,001280</td></tr>
+                            <tr><td>Kaki belakang</td><td class="angka">40</td><td class="angka">40</td><td class="angka">820</td><td class="angka">840</td><td class="angka">2</td><td class="angka">0,002624</td></tr>
+                            <tr><td>Rel samping</td><td class="angka">22</td><td class="angka">60</td><td class="angka">700</td><td class="angka">720</td><td class="angka">2</td><td class="angka">0,001848</td></tr>
+                            <tr><td>Rel depan</td><td class="angka">22</td><td class="angka">60</td><td class="angka">520</td><td class="angka">540</td><td class="angka">2</td><td class="angka">0,001373</td></tr>
+                            <tr><td>Sandaran atas</td><td class="angka">20</td><td class="angka">80</td><td class="angka">520</td><td class="angka">540</td><td class="angka">1</td><td class="angka">0,000832</td></tr>
+                        </tbody>
+                        <tfoot>
+                            <tr><th scope="row" colspan="5">Total Teak solid</th><td class="angka">9</td><td class="angka">0,007957</td></tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Edisi ===== -->
+        <section class="bagian" id="edisi">
+            <div class="wadah">
+                <div class="kepala">
+                    <span class="eyebrow eyebrow-gelap">Edisi</span>
+                    <h2>Mulai dari demo, lanjut ke tim</h2>
+                    <p>Aplikasi untuk Windows. Sekali pasang langsung jalan, tanpa perlu memasang program lain.</p>
+                </div>
+                <div class="edisi-grid">
+                    <article class="edisi">
+                        <h3>Matra Demo</h3>
+                        <p class="edisi-sub">Coba alur lengkap dengan gambar Anda sendiri.</p>
+                        <ul class="cek cek-gelap">
+                            <li>1 proyek, 1 gambar DWG</li>
+                            <li>Pratinjau 3D, material per part</li>
+                            <li>BOM dan cut list</li>
+                            <li>Langsung pakai, tanpa membuat akun</li>
+                        </ul>
+                        <a class="tombol tombol-garis-gelap" href="#kontak">Minta file demo</a>
+                    </article>
+                    <article class="edisi edisi-utama">
+                        <span class="edisi-lencana">Untuk produksi</span>
+                        <h3>Matra Lengkap</h3>
+                        <p class="edisi-sub">Untuk tim drafter, PPIC, dan pembelian.</p>
+                        <ul class="cek">
+                            <li>Proyek dan gambar tanpa batas</li>
+                            <li>Dipakai bersama di jaringan kantor</li>
+                            <li>Akun pengguna dan hak akses per jabatan</li>
+                            <li>Harga material, biaya bahan, ekspor Excel/PDF</li>
+                            <li>Kirim model 3D ke buyer lewat email</li>
+                            <li>Cadangan data otomatis dan pembaruan aplikasi</li>
+                            <li>Bisa disesuaikan dengan kebutuhan pabrik Anda</li>
+                        </ul>
+                        <a class="tombol tombol-kayu" href="#kontak">Hubungi kami</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FAQ ===== -->
+        <section class="bagian bagian-abu" id="faq">
+            <div class="wadah wadah-sempit">
+                <div class="kepala">
+                    <span class="eyebrow eyebrow-gelap">FAQ</span>
+                    <h2>Pertanyaan yang sering muncul</h2>
+                </div>
+                <div class="faq">
+                    <details>
+                        <summary>Apakah perlu AutoCAD terpasang?</summary>
+                        <p>Tidak. Matra membaca file DWG secara langsung. AutoCAD hanya dipakai drafter untuk menggambar.</p>
+                    </details>
+                    <details>
+                        <summary>DWG versi berapa yang didukung?</summary>
+                        <p>DWG dari AutoCAD lama (mis. AutoCAD 2000) sampai versi terbaru. Satuan gambar dikenali otomatis, jadi gambar dalam cm atau inci tetap dihitung dalam milimeter.</p>
+                    </details>
+                    <details>
+                        <summary>Bagaimana dengan part lengkung, seperti rail bengkok atau anyaman rotan?</summary>
+                        <p>Ukuran diambil dari muka potong yang tepinya lurus, sehingga part lengkung terukur sebagai bahan lurus yang perlu dibeli. Ukuran bahan tetap bisa Anda ubah per part.</p>
+                    </details>
+                    <details>
+                        <summary>Gambar saya hanya 2D atau PDF. Apakah bisa dipakai?</summary>
+                        <p>Saat ini Matra membutuhkan gambar dengan model 3D (solid) di file DWG. Dukungan gambar 2D dan PDF sedang dikembangkan.</p>
+                    </details>
+                    <details>
+                        <summary>Apakah butuh koneksi internet?</summary>
+                        <p>Tidak. Matra berjalan di komputer kantor dan diakses lewat jaringan kantor. Internet hanya dipakai bila Anda mengirim email dari aplikasi.</p>
+                    </details>
+                    <details>
+                        <summary>Qty di BOM lebih banyak dari cut list saya. Kenapa?</summary>
+                        <p>DWG sering memuat beberapa salinan model (rakitan, urai, ukuran lain) dalam satu file. Matra menghitung semuanya. Hapus salinan yang tidak dipakai langsung dari pratinjau 3D.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CTA ===== -->
+        <section class="cta" id="kontak">
+            <div class="wadah cta-dalam">
+                <h2>Coba dengan gambar DWG Anda sendiri</h2>
+                <p>Kirim pesan, kami siapkan file Matra Demo dan bantu proses gambar pertama Anda. Format cut list, material, dan alur kerja bisa disesuaikan dengan kebutuhan pabrik Anda.</p>
+                <div class="hero-aksi">
+                    <a class="tombol tombol-kayu" href="https://wa.me/6287786705516?text=Halo%2C%20saya%20ingin%20mencoba%20Matra%20Demo." target="_blank" rel="noopener">Chat WhatsApp</a>
+                    <a class="tombol tombol-garis" href="mailto:alipnrstudio@gmail.com?subject=Permintaan%20Matra%20Demo&amp;body=Halo%2C%20saya%20ingin%20mencoba%20Matra%20Demo.%0A%0ANama%3A%20%0APerusahaan%3A%20%0ANo.%20HP%2FWhatsApp%3A%20">Kirim email</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="kaki">
+        <div class="wadah kaki-dalam">
+            <span class="brand brand-kecil">
+                <svg class="logo" viewBox="0 0 32 32" width="22" height="22" aria-hidden="true">
+                    <path d="M16 3 L28 9.5 L28 22.5 L16 29 L4 22.5 L4 9.5 Z M4 9.5 L16 16 L28 9.5 M16 16 L16 29" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                    <path d="M16 16 L28 9.5 L28 22.5 L16 29 Z" fill="#c8894f" opacity="0.9" />
+                </svg>
+                Matra
+            </span>
+            <span>&copy; 2026 Matra · <i>matra</i> = dimensi, ukuran</span>
+        </div>
+    </footer>
+
+    <script>
+        // video hero: ganti thumbnail dengan iframe YouTube saat tombol putar diklik
+        document.querySelectorAll("[data-video]").forEach(function (el) {
+            el.querySelector("button").addEventListener("click", function () {
+                var f = document.createElement("iframe");
+                f.src = "https://www.youtube-nocookie.com/embed/" + el.dataset.video + "?autoplay=1&rel=0";
+                f.title = "Video demo Matra";
+                f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+                f.allowFullscreen = true;
+                f.referrerPolicy = "strict-origin-when-cross-origin";
+                el.replaceChildren(f);
+            });
+        });
+        // galeri: tab langkah + tombol geser + panah kiri/kanan keyboard
+        (function () {
+            var tabs = Array.prototype.slice.call(document.querySelectorAll(".galeri-tab [role=tab]"));
+            var panel = document.getElementById("galeri-panel");
+            var img = panel.querySelector("img");
+            var aktif = 0;
+            function pilih(i, fokus) {
+                aktif = (i + tabs.length) % tabs.length;
+                tabs.forEach(function (t, j) {
+                    t.setAttribute("aria-selected", j === aktif ? "true" : "false");
+                    t.tabIndex = j === aktif ? 0 : -1;
+                });
+                var t = tabs[aktif];
+                img.src = t.dataset.src;
+                img.alt = t.dataset.alt;
+                panel.setAttribute("aria-labelledby", t.id);
+                t.scrollIntoView({ block: "nearest", inline: "nearest" });
+                if (fokus) t.focus();
+            }
+            tabs.forEach(function (t, i) {
+                t.addEventListener("click", function () { pilih(i); });
+                t.addEventListener("keydown", function (e) {
+                    if (e.key === "ArrowRight") { pilih(aktif + 1, true); e.preventDefault(); }
+                    if (e.key === "ArrowLeft") { pilih(aktif - 1, true); e.preventDefault(); }
+                });
+            });
+            panel.querySelectorAll("[data-geser]").forEach(function (b) {
+                b.addEventListener("click", function () { pilih(aktif + Number(b.dataset.geser)); });
+            });
+        })();
+
+        // bayangan navbar setelah halaman digulir
+        (function () {
+            var nav = document.querySelector("[data-nav]");
+            var cek = function () { nav.classList.toggle("nav-gulir", window.scrollY > 8); };
+            window.addEventListener("scroll", cek, { passive: true });
+            cek();
+        })();
+    </script>
+</body>
+</html>
