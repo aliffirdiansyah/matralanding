@@ -261,7 +261,7 @@ a { color: inherit; }
 /* ===== Alur ===== */
 .alur {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.5rem;
   margin: 0;
   padding: 0;
@@ -275,7 +275,7 @@ a { color: inherit; }
   border-radius: var(--radius);
   background: #fff;
 }
-.alur li:not(:last-child)::after {
+.alur li:not(:last-child):not(:nth-child(3n))::after {
   content: "";
   position: absolute;
   top: 2.6rem;
@@ -337,7 +337,7 @@ a { color: inherit; }
   box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.8);
   background: var(--ink-3);
 }
-.galeri-panel img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; }
+.galeri-panel img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; }
 .galeri-geser {
   position: absolute;
   top: 50%;

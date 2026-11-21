@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Matra · Hitung bahan furnitur dari DWG</title>
-    <meta name="description" content="Matra membaca model 3D di file DWG, memecahnya menjadi part, lalu menyusun Bill of Materials dan cut list per material. Tanpa hitung manual." />
+    <meta name="description" content="Matra membaca model 3D di file DWG, menyusun cut list, BOM, dan biaya per unit, lalu menghitung kebutuhan bahan Purchase Order sampai rencana muat kontainer. Tanpa hitung manual." />
     <meta name="theme-color" content="#16201c" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3 L28 9.5 L28 22.5 L16 29 L4 22.5 L4 9.5 Z M4 9.5 L16 16 L28 9.5 M16 16 L16 29' fill='none' stroke='%2316201c' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M16 16 L28 9.5 L28 22.5 L16 29 Z' fill='%23c8894f'/%3E%3C/svg%3E" />
     <!-- font lokal (sama dengan MatraWeb/wwwroot/lib/fonts), tanpa CDN -->
@@ -28,7 +28,7 @@
             <nav class="nav-menu" aria-label="Utama">
                 <a href="#alur">Cara kerja</a>
                 <a href="#fitur">Fitur</a>
-                <a href="#cutlist">Cut list</a>
+                <a href="#galeri">Lihat langsung</a>
                 <a href="#edisi">Edisi</a>
                 <a href="#faq">FAQ</a>
             </nav>
@@ -41,11 +41,12 @@
         <section class="hero">
             <div class="wadah wadah-lebar hero-grid">
                 <div class="hero-teks">
-                    <span class="eyebrow">Quantity take-off furnitur</span>
+                    <span class="eyebrow">Quantity take-off &amp; PPIC furnitur</span>
                     <h1>Dari gambar DWG ke daftar bahan, <span>tanpa hitung manual.</span></h1>
                     <p class="hero-desc">
-                        Unggah model 3D furnitur. Matra memecah model menjadi part, mengukur bahan mentahnya,
-                        lalu menyusun Bill of Materials dan cut list per material, lengkap dengan m³ dan biaya.
+                        Unggah model 3D furnitur. Matra memecah model menjadi part, menyusun cut list dan
+                        Bill of Materials, menghitung biaya per unit, lalu kebutuhan bahan setiap Purchase Order
+                        sampai rencana muat kontainer.
                     </p>
                     <div class="hero-aksi">
                         <a class="tombol tombol-kayu" href="#kontak">Coba Matra Demo</a>
@@ -55,6 +56,7 @@
                         <li>Tanpa AutoCAD terpasang</li>
                         <li>Jalan di jaringan kantor, tanpa internet</li>
                         <li>Ekspor Excel &amp; PDF</li>
+                        <li>Bahasa Indonesia &amp; Inggris</li>
                         <li>Bisa disesuaikan dengan kebutuhan pabrik Anda</li>
                     </ul>
                 </div>
@@ -82,34 +84,44 @@
             <div class="wadah">
                 <div class="kepala">
                     <span class="eyebrow eyebrow-gelap">Cara kerja</span>
-                    <h2>Empat langkah dari file ke daftar potong</h2>
+                    <h2>Dari file DWG sampai siap kirim</h2>
                 </div>
                 <ol class="alur">
                     <li>
                         <span class="alur-no">01</span>
                         <h3>Unggah DWG</h3>
-                        <p>Buat proyek, unggah satu atau banyak file. Satu gambar = satu unit furnitur. File dibaca di latar, Anda bisa lanjut bekerja.</p>
+                        <p>Buat collection per buyer, unggah satu atau banyak file. Satu gambar = satu item furnitur. File dibaca di latar, Anda bisa lanjut bekerja.</p>
                     </li>
                     <li>
                         <span class="alur-no">02</span>
                         <h3>Part terbaca otomatis</h3>
-                        <p>Setiap benda 3D di gambar, termasuk yang ada di dalam komponen berulang, dipecah menjadi part. Ukuran bahan mentah P × L × T diambil dari muka potongnya.</p>
+                        <p>Setiap benda 3D dipecah menjadi part, termasuk komponen berulang. Ukuran bahan mentah diambil dari bentuknya; tenon, dowel, dan hardware dikenali sendiri.</p>
                     </li>
                     <li>
                         <span class="alur-no">03</span>
                         <h3>Pilih material di 3D</h3>
-                        <p>Klik part di pratinjau 3D, beri material. Terapkan sekaligus ke part identik atau mirip dalam satu klik.</p>
+                        <p>Klik part di pratinjau 3D, beri material. Terapkan sekaligus ke part identik atau mirip. Semua perubahan tersimpan otomatis.</p>
                     </li>
                     <li>
                         <span class="alur-no">04</span>
-                        <h3>BOM &amp; cut list siap</h3>
-                        <p>Bill of Materials per material dan ukuran, cut list netto/brutto, m³, dan biaya bahan. Unduh Excel atau PDF.</p>
+                        <h3>BOM, cut list &amp; biaya</h3>
+                        <p>Cut list netto/brutto, m³ per material, lalu biaya 1 unit: kayu, bahan penolong, packing, dan ongkos kerja.</p>
+                    </li>
+                    <li>
+                        <span class="alur-no">05</span>
+                        <h3>Purchase Order</h3>
+                        <p>Masukkan PO buyer dan qty per item. Kebutuhan kayu, bahan penolong, dan ongkos dihitung otomatis, lengkap dengan rekap per supplier.</p>
+                    </li>
+                    <li>
+                        <span class="alur-no">06</span>
+                        <h3>Muat kontainer</h3>
+                        <p>Karton box setiap item disusun ke kontainer dalam 3D. Geser, kunci posisi, atur urutan bongkar, lalu cetak load plan.</p>
                     </li>
                 </ol>
             </div>
         </section>
 
-        <!-- ===== Galeri (frame dari out/showcase/frame, dikonversi ke WebP 1600px) ===== -->
+        <!-- ===== Galeri (screenshot out/promosi/id, data contoh, WebP 1600px) ===== -->
         <section class="bagian bagian-gelap" id="galeri">
             <div class="wadah">
                 <div class="kepala">
@@ -117,30 +129,33 @@
                     <h2>Matra dari unggah sampai siap produksi</h2>
                 </div>
                 <div class="galeri-tab" role="tablist" aria-label="Langkah Matra">
-                    <button type="button" role="tab" id="tab-0" aria-controls="galeri-panel" aria-selected="true" tabindex="0" data-src="img/03-unggah-dwg.webp" data-alt="Unggah file DWG, satuan gambar dibaca langsung dari file.">
-                        <span class="galeri-no">01</span>Unggah DWG
+                    <button type="button" role="tab" id="tab-0" aria-controls="galeri-panel" aria-selected="true" tabindex="0" data-src="img/01-model-3d.webp" data-alt="DWG terbaca menjadi model 3D bertekstur, lengkap dengan info item.">
+                        <span class="galeri-no">01</span>Model 3D
                     </button>
-                    <button type="button" role="tab" id="tab-1" aria-controls="galeri-panel" aria-selected="false" tabindex="-1" data-src="img/04-solid-jadi-part.webp" data-alt="Setiap benda di model 3D menjadi part, ukuran bahan diambil dari bentuknya.">
-                        <span class="galeri-no">02</span>Baca otomatis
+                    <button type="button" role="tab" id="tab-1" aria-controls="galeri-panel" aria-selected="false" tabindex="-1" data-src="img/02-material-part.webp" data-alt="Klik part, pilih material, terapkan ke part identik sekaligus.">
+                        <span class="galeri-no">02</span>Material
                     </button>
-                    <button type="button" role="tab" id="tab-2" aria-controls="galeri-panel" aria-selected="false" tabindex="-1" data-src="img/05-pisahkan-part.webp" data-alt="Satu klik mengurai model, sampai dowel dan sekrup terkecil.">
-                        <span class="galeri-no">03</span>Urai part
+                    <button type="button" role="tab" id="tab-2" aria-controls="galeri-panel" aria-selected="false" tabindex="-1" data-src="img/03-bom.webp" data-alt="Bill of Materials per material dan ukuran, lengkap dengan m³ dan biaya.">
+                        <span class="galeri-no">03</span>BOM
                     </button>
-                    <button type="button" role="tab" id="tab-3" aria-controls="galeri-panel" aria-selected="false" tabindex="-1" data-src="img/06-material-sekali-klik.webp" data-alt="Pilih satu part, part yang identik ikut terpilih.">
-                        <span class="galeri-no">04</span>Pilih material
+                    <button type="button" role="tab" id="tab-3" aria-controls="galeri-panel" aria-selected="false" tabindex="-1" data-src="img/04-cut-list.webp" data-alt="Cut list T x L x P netto, P brutto, jumlah, m³ dan m², siap Excel dan PDF.">
+                        <span class="galeri-no">04</span>Cut list
                     </button>
-                    <button type="button" role="tab" id="tab-4" aria-controls="galeri-panel" aria-selected="false" tabindex="-1" data-src="img/07-bom-klik-baris.webp" data-alt="Kebutuhan bahan per material dan ukuran. Klik baris, part disorot di model.">
-                        <span class="galeri-no">05</span>BOM &amp; cut list
+                    <button type="button" role="tab" id="tab-4" aria-controls="galeri-panel" aria-selected="false" tabindex="-1" data-src="img/05-total-biaya.webp" data-alt="Total biaya 1 unit: bahan baku, bahan penolong, dan ongkos kerja.">
+                        <span class="galeri-no">05</span>Biaya per unit
                     </button>
-                    <button type="button" role="tab" id="tab-5" aria-controls="galeri-panel" aria-selected="false" tabindex="-1" data-src="img/08-excel-pdf-siap-produksi.webp" data-alt="Excel daftar potong format pabrik, PDF cut list, dan PDF BOM.">
-                        <span class="galeri-no">06</span>Siap produksi
+                    <button type="button" role="tab" id="tab-5" aria-controls="galeri-panel" aria-selected="false" tabindex="-1" data-src="img/06-purchase-order.webp" data-alt="Kebutuhan bahan PO dihitung otomatis dari qty item, lengkap dengan supplier.">
+                        <span class="galeri-no">06</span>Purchase Order
                     </button>
-                    <button type="button" role="tab" id="tab-6" aria-controls="galeri-panel" aria-selected="false" tabindex="-1" data-src="img/09-kirim-3d-tembus-pandang.webp" data-alt="Model 3D yang dibuka buyer di browser, tanpa material.">
-                        <span class="galeri-no">07</span>Kirim ke buyer
+                    <button type="button" role="tab" id="tab-6" aria-controls="galeri-panel" aria-selected="false" tabindex="-1" data-src="img/07-kontainer.webp" data-alt="Kalkulator kontainer: karton item disusun dalam 3D, siap jadi load plan.">
+                        <span class="galeri-no">07</span>Kontainer
+                    </button>
+                    <button type="button" role="tab" id="tab-7" aria-controls="galeri-panel" aria-selected="false" tabindex="-1" data-src="img/08-beranda.webp" data-alt="Beranda dengan ringkasan produksi dan kalender jadwal kirim PO.">
+                        <span class="galeri-no">08</span>Beranda
                     </button>
                 </div>
                 <div class="galeri-panel" id="galeri-panel" role="tabpanel" aria-labelledby="tab-0">
-                    <img src="img/03-unggah-dwg.webp" alt="Unggah file DWG, satuan gambar dibaca langsung dari file." width="1600" height="900" />
+                    <img src="img/01-model-3d.webp" alt="DWG terbaca menjadi model 3D bertekstur, lengkap dengan info item." width="1600" height="1000" />
                     <button type="button" class="galeri-geser galeri-kiri" data-geser="-1" aria-label="Langkah sebelumnya">
                         <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5 L8 12 L15 19" /></svg>
                     </button>
@@ -150,7 +165,7 @@
                 </div>
             </div>
             <!-- muat gambar lain lebih awal supaya ganti tab tidak berkedip -->
-            <div hidden><link rel="prefetch" href="img/04-solid-jadi-part.webp" /><link rel="prefetch" href="img/05-pisahkan-part.webp" /><link rel="prefetch" href="img/06-material-sekali-klik.webp" /><link rel="prefetch" href="img/07-bom-klik-baris.webp" /><link rel="prefetch" href="img/08-excel-pdf-siap-produksi.webp" /><link rel="prefetch" href="img/09-kirim-3d-tembus-pandang.webp" /></div>
+            <div hidden><link rel="prefetch" href="img/02-material-part.webp" /><link rel="prefetch" href="img/03-bom.webp" /><link rel="prefetch" href="img/04-cut-list.webp" /><link rel="prefetch" href="img/05-total-biaya.webp" /><link rel="prefetch" href="img/06-purchase-order.webp" /><link rel="prefetch" href="img/07-kontainer.webp" /><link rel="prefetch" href="img/08-beranda.webp" /></div>
         </section>
 
         <!-- ===== Fitur ===== -->
@@ -159,7 +174,7 @@
                 <div class="kepala">
                     <span class="eyebrow eyebrow-gelap">Fitur</span>
                     <h2>Dibuat untuk alur kerja pabrik furnitur</h2>
-                    <p>Dari drafter yang menggambar sampai bagian pembelian yang memesan kayu.</p>
+                    <p>Dari drafter yang menggambar, PPIC yang merencanakan, sampai bagian pembelian dan ekspor.</p>
                 </div>
                 <div class="fitur-grid">
                     <article class="fitur">
@@ -184,8 +199,8 @@
                     </article>
                     <article class="fitur">
                         <svg class="fitur-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 V21 M17 7 H9.5 A2.5 2.5 0 0 0 9.5 12 H14.5 A2.5 2.5 0 0 1 14.5 17 H7" /></svg>
-                        <h3>Biaya bahan</h3>
-                        <p>Harga per m³, susut % per material, dan panel berlembar dihitung per lembar, termasuk tebal mata gergaji. Qty dikali jumlah unit pesanan.</p>
+                        <h3>Biaya per unit</h3>
+                        <p>Harga per m³, ukuran brutto kayu, susut % per material, dan panel berlembar dihitung per lembar. Total biaya 1 unit termasuk bahan penolong, packing, dan ongkos kerja.</p>
                     </article>
                     <article class="fitur">
                         <svg class="fitur-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6 L12 13 L21 6 M3 6 H21 V18 H3 Z" /></svg>
@@ -202,6 +217,26 @@
                         <h3>Data tetap di kantor Anda</h3>
                         <p>Gambar dan data tersimpan di komputer kantor sendiri. Cadangan dibuat otomatis, termasuk semua file gambar, dan bisa dipulihkan kapan saja.</p>
                     </article>
+                    <article class="fitur">
+                        <svg class="fitur-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3 H15 L19 7 V21 H6 Z M15 3 V7 H19 M9 12 H16 M9 16 H16" /></svg>
+                        <h3>Purchase Order otomatis</h3>
+                        <p>PO buyer dengan qty per item langsung menjadi kebutuhan kayu, bahan penolong, dan ongkos kerja, plus rekap per supplier. Tanpa tombol hitung.</p>
+                    </article>
+                    <article class="fitur">
+                        <svg class="fitur-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8 L12 4 L21 8 V17 L12 21 L3 17 Z M3 8 L12 12 L21 8 M12 12 V21 M7.5 6 L16.5 10" /></svg>
+                        <h3>Kalkulator &amp; load plan kontainer</h3>
+                        <p>Karton box item disusun ke kontainer atau pallet dalam 3D. Geser dan kunci posisi, urutan bongkar, beberapa kontainer sekaligus, ekspor PDF dan Excel manifest.</p>
+                    </article>
+                    <article class="fitur">
+                        <svg class="fitur-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6 H20 V20 H4 Z M4 10 H20 M8 3 V7 M16 3 V7 M8 14 H10 M14 14 H16 M8 17 H10" /></svg>
+                        <h3>Beranda &amp; jadwal kirim</h3>
+                        <p>Ringkasan collection, item, dan PO, hal yang perlu perhatian, serta kalender jadwal kirim semua PO dalam satu layar.</p>
+                    </article>
+                    <article class="fitur">
+                        <svg class="fitur-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5 H13 M8 3 V5 M11 5 C10 10 6 13 3 14 M6 9 C7.5 11.5 10 13 13 14 M13 21 L17 11 L21 21 M14.5 18 H19.5" /></svg>
+                        <h3>Bahasa Indonesia &amp; Inggris</h3>
+                        <p>Setiap pengguna memilih bahasanya sendiri. PDF, Excel, email, dan model 3D untuk buyer ikut dalam bahasa yang dipilih.</p>
+                    </article>
                 </div>
             </div>
         </section>
@@ -214,7 +249,7 @@
                     <h2>Cut list yang langsung dipakai bagian produksi</h2>
                     <p>Satu baris per komponen sama. P brutto = P netto + allowance potong (bawaan 20 mm). m³ dihitung dari ukuran netto, total per material.</p>
                     <ul class="cek">
-                        <li>Per gambar atau gabungan satu proyek</li>
+                        <li>Per item atau gabungan satu collection</li>
                         <li>Excel dengan rumus, atau PDF siap cetak</li>
                         <li>Diperbarui begitu material atau ukuran diubah</li>
                     </ul>
@@ -262,7 +297,7 @@
                         <h3>Matra Demo</h3>
                         <p class="edisi-sub">Coba alur lengkap dengan gambar Anda sendiri.</p>
                         <ul class="cek cek-gelap">
-                            <li>1 proyek, 1 gambar DWG</li>
+                            <li>1 collection, 1 gambar DWG</li>
                             <li>Pratinjau 3D, material per part</li>
                             <li>BOM dan cut list</li>
                             <li>Langsung pakai, tanpa membuat akun</li>
@@ -274,10 +309,11 @@
                         <h3>Matra Lengkap</h3>
                         <p class="edisi-sub">Untuk tim drafter, PPIC, dan pembelian.</p>
                         <ul class="cek">
-                            <li>Proyek dan gambar tanpa batas</li>
+                            <li>Collection dan gambar tanpa batas</li>
                             <li>Dipakai bersama di jaringan kantor</li>
                             <li>Akun pengguna dan hak akses per jabatan</li>
-                            <li>Harga material, biaya bahan, ekspor Excel/PDF</li>
+                            <li>Biaya per unit, Purchase Order, dan load plan kontainer</li>
+                            <li>Ekspor Excel/PDF dalam Bahasa Indonesia atau Inggris</li>
                             <li>Kirim model 3D ke buyer lewat email</li>
                             <li>Cadangan data otomatis dan pembaruan aplikasi</li>
                             <li>Bisa disesuaikan dengan kebutuhan pabrik Anda</li>
@@ -310,7 +346,11 @@
                     </details>
                     <details>
                         <summary>Gambar saya hanya 2D atau PDF. Apakah bisa dipakai?</summary>
-                        <p>Saat ini Matra membutuhkan gambar dengan model 3D (solid) di file DWG. Dukungan gambar 2D dan PDF sedang dikembangkan.</p>
+                        <p>DWG 2D bisa dipakai: Matra menampilkan gambarnya, lalu part diisi dengan klik dimensi, klik kotak di gambar, atau impor cut list Excel, dan disusun menjadi 3D sederhana. Part otomatis penuh tetap membutuhkan model 3D (solid). PDF belum didukung.</p>
+                    </details>
+                    <details>
+                        <summary>Bisakah menghitung isi kontainer untuk satu PO?</summary>
+                        <p>Bisa. Setiap Purchase Order punya kalkulator kontainer yang otomatis berisi karton box dari item PO. Ukuran karton terisi dari ukuran item plus kelonggaran packing, dan bisa diubah.</p>
                     </details>
                     <details>
                         <summary>Apakah butuh koneksi internet?</summary>
